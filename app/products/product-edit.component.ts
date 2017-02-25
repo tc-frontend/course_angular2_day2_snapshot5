@@ -72,7 +72,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                 confirmProductCode: ['', Validators.required],
             }, {validator: StringValidators.controlValueMatcher('productCode', 'confirmProductCode')}),
             starRating: ['', NumberValidators.range(1,5)],
-            tags: this.fb.array([this.buildTags()]),
+            tags: this.fb.array([]),
             description: '',
             availability: 'available',
             outOfStockReason: ['', Validators.required],
@@ -92,9 +92,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         );
     }
     
-    buildTags(): FormGroup{
+    buildTags(tag:string = ""): FormGroup{
         return this.fb.group({
-                tag: ''
+                tag: tag
         });
     }
 
@@ -200,12 +200,18 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             outOfStockReason: product.outOfStockReason,
             quantity: product.quantity
         });
+
+        if(product.tags){
+            product.tags.map(tag=>{
+                this.tags.push(this.buildTags(tag));
+            });
+        }
+
        
         this.isLoading = false;
         const confirmProductCode= this.productForm.get('codeGroup.confirmProductCode');
         if (product.id === 0) {
             this.pageTitle = 'Add Product';
-            //this.product.tags = [];
             this. mode='create';
             confirmProductCode.setValidators(Validators.required);
         } else {
@@ -215,14 +221,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         }
 
     }
-    /*
+  
     addTag(): void {
-        if(!this.product.tags){
-            this.product.tags = [];
-        }
-        this.product.tags.push('');
+        this.tags.push(this.buildTags(''));
     }
-    */
+
 
     deleteProduct(): void {
         if (this.product.id === 0) {
@@ -244,6 +247,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         if (this.productForm.dirty && this.productForm.valid) {
             // Copy the form values over the product object values
             let p = Object.assign({}, this.product, this.productForm.value);
+            p.tags = p.tags.map( (item:any) => item.tag );
             p.productCode = p.codeGroup.productCode;
             delete p.codeGroup;
 

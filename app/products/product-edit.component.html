@@ -76,14 +76,25 @@
                         </span>
                     </div>
                 </div>
-                <div formArrayName="tags">
-                    <div formGroupName="0">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="starRatingId">Rating</label>
+
+                    <div class="col-md-8">
+                        <button class=" btn btn-default"
+                                type="button"
+                                (click)="addTag()">Add Tag
+                        </button>
+                        
+                    </div>
+                </div>
+                <div formArrayName="tags" *ngFor="let tag of tags.controls; let i=index">
+                    <div [formGroupName]="i">
                         <div class="form-group" >
-                            <label class="col-md-2 control-label" for="i">Tag</label>
+                            <label class="col-md-2 control-label" attr.for="{{ 'tag' +i }}">Tag {{ i }}</label>
 
                             <div class="col-md-8">
                                 <input class="form-control" 
-                                        id="i" 
+                                        id="{{ 'tag' +i }}" 
                                         type="text" 
                                         placeholder="Tag" 
                                         formControlName="tag"/>
