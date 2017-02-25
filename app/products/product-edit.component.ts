@@ -68,9 +68,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                 confirmProductCode: ['', Validators.required],
             }, {validator: StringValidators.controlValueMatcher('productCode', 'confirmProductCode')}),
             starRating: ['', NumberValidators.range(1,5)],
-            tagGroup: this.fb.group({
-                tag: ''
-            }),
+            tagGroup: this.buildTags(),
             description: '',
             availability: 'available',
             outOfStockReason: ['', Validators.required],
@@ -89,7 +87,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             }
         );
     }
- 
+    
+    buildTags(): FormGroup{
+        return this.fb.group({
+                tag: ''
+        });
+    }
+
     changeAvailability(type: string): void{
         const reasonForm= this.productForm.get('outOfStockReason');
 
