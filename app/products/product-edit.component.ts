@@ -68,6 +68,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                 confirmProductCode: ['', Validators.required],
             }, {validator: StringValidators.controlValueMatcher('productCode', 'confirmProductCode')}),
             starRating: ['', NumberValidators.range(1,5)],
+            tagGroup: this.fb.group({
+                tag: ''
+            }),
             description: '',
             availability: 'available',
             outOfStockReason: ['', Validators.required],
