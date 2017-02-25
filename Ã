@@ -1,0 +1,49 @@
++Initial commit
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Fri Feb 24 12:14:38 2017 +0100
+#
+# On branch new-root
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   .gitignore
+#	new file:   api/products/products.json
+#	new file:   app/app-routing.module.ts
+#	new file:   app/app.component.css
+#	new file:   app/app.component.ts
+#	new file:   app/app.module.ts
+#	new file:   app/assets/images/logo.jpg
+#	new file:   app/home/welcome.component.html
+#	new file:   app/home/welcome.component.ts
+#	new file:   app/main.ts
+#	new file:   app/products/product-data.ts
+#	new file:   app/products/product-detail.component.html
+#	new file:   app/products/product-detail.component.ts
+#	new file:   app/products/product-edit.component.html
+#	new file:   app/products/product-edit.component.ts
+#	new file:   app/products/product-filter.pipe.ts
+#	new file:   app/products/product-guard.service.ts
+#	new file:   app/products/product-list.component.css
+#	new file:   app/products/product-list.component.html
+#	new file:   app/products/product-list.component.ts
+#	new file:   app/products/product-mock.service.ts
+#	new file:   app/products/product-routing.module.ts
+#	new file:   app/products/product.module.ts
+#	new file:   app/products/product.ts
+#	new file:   app/shared/shared.module.ts
+#	new file:   app/shared/star.component.css
+#	new file:   app/shared/star.component.html
+#	new file:   app/shared/star.component.ts
+#	new file:   favicon.ico
+#	new file:   index.html
+#	new file:   package.json
+#	new file:   readme.md
+#	new file:   systemjs.config.js
+#	new file:   tsconfig.json
+#	new file:   tslint.json
+#	new file:   typings.json
+#

@@ -1,0 +1,206 @@
+<div class="panel panel-primary" *ngIf="!isLoading">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal"
+              novalidate
+              [formGroup]="productForm"
+              (ngSubmit)="saveProduct()">
+            <fieldset>
+                <div class="form-group" 
+                     [ngClass]="{'has-error': displayMessages.productName }">
+                    <label class="col-md-2 control-label" for="productNameId">Product Name</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                                id="productNameId" 
+                                type="text" 
+                                placeholder="Name (required)"
+                                formControlName="productName"/>
+                        <span class="help-block" *ngIf="displayMessages.productName">
+                            {{ displayMessages.productName }}
+                        </span>
+                    </div>
+                </div>
+                <div formGroupName="codeGroup">
+                    <div class="form-group" 
+                        [ngClass]="{'has-error': displayMessages.productCode || displayMessages.codeGroup}">
+                        <label class="col-md-2 control-label" for="productCodeId">Product Code</label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" 
+                                    id="productCodeId" 
+                                    type="text" 
+                                    placeholder="Code (required)"
+                                    formControlName="productCode"/>
+                            <span class="help-block" *ngIf="displayMessages.productCode">
+                                     {{ displayMessages.productCode }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="mode=='create'"
+                        [ngClass]="{'has-error': displayMessages.confirmProductCode || displayMessages.codeGroup}">
+                        <label class="col-md-2 control-label" for="confirmProductCodeId">Confirm Product Code</label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" 
+                                    id="confirmProductCodeId" 
+                                    type="text" 
+                                    placeholder="Confirm Code (required)"
+                                    formControlName="confirmProductCode"/>
+                            <span class="help-block" *ngIf="displayMessages.confirmProductCode">
+                                    {{ displayMessages.confirmProductCode}}
+                            </span>
+                            <span class="help-block" *ngIf="displayMessages.codeGroup">
+                                   {{ displayMessages.codeGroup }}
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group" 
+                     [ngClass]="{'has-error': displayMessages.starRating}">
+                    <label class="col-md-2 control-label" for="starRatingId">Rating</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                                id="starRatingId" 
+                                type="text" 
+                                placeholder="Rating"
+                                formControlName="starRating"/>
+                        <span class="help-block" *ngIf="displayMessages.starRating">
+                                {{ displayMessages.starRating }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="descriptionId">Description</label>
+
+                    <div class="col-md-8">
+                        <textarea class="form-control" 
+                                id="descriptionId" 
+                                placeholder="Description"
+                                rows=3
+                                formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Availability</label>
+
+                    <div class="col-md-8">
+                        <div class="radio">
+                            <label>
+                                 <input type="radio"
+                                   value="available"
+                                   name="availability"
+                                   formControlName="availability">Available
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio"
+                                   value="lessthan2weeks"
+                                   name="availability"
+                                   formControlName="availability">Less than 2 weeks
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio"
+                                   value="morethan2weeks"
+                                   name="availability"
+                                   formControlName="availability">More than 2 weeks
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                               <input type="radio"
+                                   value="outofstock"
+                                   name="availability"
+                                   formControlName="availability">Out of stock   
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group" *ngIf="productForm.get('availability').value!='outofstock'"
+                     [ngClass]="{'has-error': displayMessages.quantity}">
+                    <label class="col-md-2 control-label" for="quantityId">Quatity</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                                id="quantityId" 
+                                type="text" 
+                                placeholder="Quantity"
+                                formControlName="quantity"/>
+                        <span class="help-block" *ngIf="displayMessages.quantity">
+                                {{displayMessages.quantity}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="productForm.get('availability').value=='outofstock'"
+                    [ngClass]="{'has-error': displayMessages.outOfStockReason}">
+                    <label class="col-md-2 control-label" for="outOsStockReasonId">Out of stock reason</label>
+
+                    <div class="col-md-8">
+                        <select class="form-control"   
+                            id="outOsStockReasonId"
+                            formControlName="outOfStockReason">
+                                <option value="" disabled selected hidden>Select a reason...</option>
+                                <option value="late_delivery">Late delivery by a supplier</option>
+                                <option value="under_ordering">Under ordering</option>
+                                <option value="stock_level_low">Safety stock level that is too low </option>
+                                <option value="product_quality_issues">Product quality issues</option>
+                                <option value="supplier_refusing">The supplier refusing to deliver </option>
+                                <option value="under_estimating">Under estimating the demand for a product </option>
+                        </select>
+                        <span class="help-block" *ngIf="displayMessages.outOfStockReason ">
+                                {{ displayMessages.outOfStockReason }}
+                                
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <span>
+                            <button class="btn btn-primary"
+                                    type="submit"
+                                    style="width:80px;margin-right:10px"
+                                    [disabled]='!productForm.valid'>
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <a class="btn btn-default"
+                               style="width:80px"
+                               [routerLink]="['/products']">
+                                Cancel
+                            </a>
+                        </span>
+                        <span *ngIf="mode=='edit'">
+                            <a class="btn btn-danger"
+                               style="width:80px"
+                               (click)="deleteProduct()">
+                                Delete
+                            </a>
+                        </span>  
+                     </div>
+                </div>
+                
+            </fieldset>
+        </form>
+
+        <br>Dirty: {{ productForm.dirty }} 
+        <br>Touched: {{ productForm.touched }}
+        <br>Valid: {{ productForm.valid }}
+        <br>Value: {{ productForm.value | json }}
+
+        <br>Errors: {{ displayMessages | json }}
+    </div>
+
+</div>
