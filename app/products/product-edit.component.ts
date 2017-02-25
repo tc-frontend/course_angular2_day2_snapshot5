@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router  } from '@angular/router';
 
@@ -26,6 +26,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     isLoading: boolean = false;
     private validationMessages: { [key: string]: { [key: string]: string } };
     displayMessages: Object = {};
+
+    get tags(): FormArray{
+        return <FormArray>this.productForm.get('tags');
+    }
 
     constructor( private route: ActivatedRoute,
                 private router: Router,
@@ -68,7 +72,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                 confirmProductCode: ['', Validators.required],
             }, {validator: StringValidators.controlValueMatcher('productCode', 'confirmProductCode')}),
             starRating: ['', NumberValidators.range(1,5)],
-            tagGroup: this.buildTags(),
+            tags: this.fb.array([this.buildTags()]),
             description: '',
             availability: 'available',
             outOfStockReason: ['', Validators.required],

@@ -76,16 +76,18 @@
                         </span>
                     </div>
                 </div>
-                <div formGroupName="tagGroup">
-                    <div class="form-group" >
-                        <label class="col-md-2 control-label" for="i">Tag</label>
+                <div formArrayName="tags">
+                    <div formGroupName="0">
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label" for="i">Tag</label>
 
-                        <div class="col-md-8">
-                            <input class="form-control" 
-                                    id="i" 
-                                    type="text" 
-                                    placeholder="Tag" 
-                                    formControlName="tag"/>
+                            <div class="col-md-8">
+                                <input class="form-control" 
+                                        id="i" 
+                                        type="text" 
+                                        placeholder="Tag" 
+                                        formControlName="tag"/>
+                            </div>
                         </div>
                     </div>
                 </div>
